@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="ec18364607d2711027f6f4be7c1ed0ac" label="Attachment Context Relationships" max_length="40" name="x_975207_context_0_sys_attachment_rel_context" type="collection">
+        <element label="Related Attachment" max_length="32" name="related_attachment" reference="sys_attachment" type="reference"/>
+        <element label="Related Context" max_length="32" name="related_context" reference="x_975207_context_0_upload_contexts" type="reference"/>
+        <element dependent="related_table" dependent_on_field="related_table" label="Related Record" max_length="40" name="related_record" type="document_id" use_dependent_field="true"/>
+        <element label="Related Table" max_length="32" name="related_table" type="table_name"/>
+        <index name="index">
+            <element name="related_attachment"/>
+        </index>
+        <index name="index2">
+            <element name="related_context"/>
+        </index>
+        <index name="index3">
+            <element name="related_record"/>
+        </index>
+        <index name="index4">
+            <element name="related_table"/>
+        </index>
+    </element>
+</database>
