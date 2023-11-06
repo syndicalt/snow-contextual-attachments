@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="DELETE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>x_975207_context_0_upload_contexts</basic_apply_to>
+        <basic_query_from>x_975207_context_0_custom_contexts</basic_query_from>
+        <insert_callback/>
+        <name>Custom Contexts -&gt; Upload Context</name>
+        <query_from/>
+        <query_with><![CDATA[current.addQuery('related_context', parent.sys_id);]]></query_with>
+        <reference_field>related_context</reference_field>
+        <related_list/>
+        <simple_reference>true</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-06 00:00:38</sys_created_on>
+        <sys_id>656303c20716711027f6f4be7c1ed02b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Custom Contexts -&gt; Upload Context</sys_name>
+        <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
+        <sys_update_name>sys_relationship_656303c20716711027f6f4be7c1ed02b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-06 00:00:38</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="DELETE" query="documentkey=656303c20716711027f6f4be7c1ed02b"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</application>
+        <file_path/>
+        <instance_id>3423375adb9b8810b847ac44d49619ad</instance_id>
+        <instance_name>dev102255</instance_name>
+        <name>sys_relationship_656303c20716711027f6f4be7c1ed02b</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_relationship"&gt;&lt;sys_relationship action="INSERT_OR_UPDATE"&gt;&lt;advanced&gt;false&lt;/advanced&gt;&lt;apply_to/&gt;&lt;basic_apply_to&gt;x_975207_context_0_upload_contexts&lt;/basic_apply_to&gt;&lt;basic_query_from&gt;x_975207_context_0_custom_contexts&lt;/basic_query_from&gt;&lt;insert_callback/&gt;&lt;name&gt;Custom Contexts -&amp;gt; Upload Context&lt;/name&gt;&lt;query_from/&gt;&lt;query_with&gt;&lt;![CDATA[current.addQuery('related_context', parent.sys_id);]]&gt;&lt;/query_with&gt;&lt;reference_field&gt;related_context&lt;/reference_field&gt;&lt;related_list/&gt;&lt;simple_reference&gt;true&lt;/simple_reference&gt;&lt;sys_class_name&gt;sys_relationship&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-11-06 00:00:38&lt;/sys_created_on&gt;&lt;sys_id&gt;656303c20716711027f6f4be7c1ed02b&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Custom Contexts -&amp;gt; Upload Context&lt;/sys_name&gt;&lt;sys_package display_value="Contextual Attachments" source="x_975207_context_0"&gt;dc45ea8e0752711027f6f4be7c1ed021&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Contextual Attachments"&gt;dc45ea8e0752711027f6f4be7c1ed021&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_relationship_656303c20716711027f6f4be7c1ed02b&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-11-06 00:00:38&lt;/sys_updated_on&gt;&lt;/sys_relationship&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=656303c20716711027f6f4be7c1ed02b"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1675876404</payload_hash>
+        <record_name>Custom Contexts -&gt; Upload Context</record_name>
+        <reverted_from/>
+        <source>387e224a0792711027f6f4be7c1ed0e9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-06 00:00:39</sys_created_on>
+        <sys_id>ecb38b820716711027f6f4be7c1ed075</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18ba1ee6f830000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-06 00:00:39</sys_updated_on>
+        <type>Relationship</type>
+        <update_guid>24b38b8248167110542445ab646a9c75</update_guid>
+        <update_guid_history>24b38b8248167110542445ab646a9c75:1675876404</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-06 00:06:35</sys_created_on>
+        <sys_db_object display_value="" name="sys_relationship">sys_relationship</sys_db_object>
+        <sys_id>3890e6fcead94046b24dbb149d55cdf1</sys_id>
+        <sys_metadata>656303c20716711027f6f4be7c1ed02b</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Custom Contexts -&gt; Upload Context</sys_name>
+        <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
+        <sys_parent display_value="Context 0 Upload Contexts">cd7e624a0792711027f6f4be7c1ed054</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
+        <sys_scope_delete display_value="">1691d1f2aa514a94ab1f7e7f39caa510</sys_scope_delete>
+        <sys_update_name>sys_relationship_656303c20716711027f6f4be7c1ed02b</sys_update_name>
+        <sys_update_version display_value="sys_relationship_656303c20716711027f6f4be7c1ed02b">ecb38b820716711027f6f4be7c1ed075</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-06 00:06:35</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

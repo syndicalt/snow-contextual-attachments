@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_dictionary action="INSERT_OR_UPDATE" element="context_type" table="x_975207_context_0_upload_contexts">
+    <sys_dictionary action="INSERT_OR_UPDATE" element="active" table="x_975207_context_0_upload_contexts">
         <active>true</active>
         <array>false</array>
         <attributes/>
         <audit>false</audit>
         <calculation/>
-        <choice>3</choice>
+        <choice>0</choice>
         <choice_field/>
         <choice_table/>
-        <column_label>Context Type</column_label>
+        <column_label>Active</column_label>
         <comments/>
         <create_roles/>
-        <default_value>table_defined</default_value>
+        <default_value/>
         <defaultsort/>
         <delete_roles/>
         <dependent/>
@@ -21,13 +21,13 @@
         <dynamic_creation_script/>
         <dynamic_default_value/>
         <dynamic_ref_qual/>
-        <element>context_type</element>
+        <element>active</element>
         <element_reference>false</element_reference>
         <foreign_database/>
         <formula/>
         <function_definition/>
         <function_field>false</function_field>
-        <internal_type display_value="Choice">choice</internal_type>
+        <internal_type display_value="String">string</internal_type>
         <mandatory>false</mandatory>
         <max_length>40</max_length>
         <name>x_975207_context_0_upload_contexts</name>
@@ -46,14 +46,14 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2023-11-05 22:31:51</sys_created_on>
-        <sys_name>Context Type</sys_name>
+        <sys_created_on>2023-11-06 01:38:07</sys_created_on>
+        <sys_name>Active</sys_name>
         <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
         <sys_policy/>
         <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
-        <sys_update_name>sys_dictionary_x_975207_context_0_upload_contexts_context_type</sys_update_name>
+        <sys_update_name>sys_dictionary_x_975207_context_0_upload_contexts_active</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-11-06 01:32:06</sys_updated_on>
+        <sys_updated_on>2023-11-06 01:38:08</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
