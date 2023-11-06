@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="cd7e624a0792711027f6f4be7c1ed054" label="Upload Contexts" max_length="40" name="x_975207_context_0_upload_contexts" type="collection">
-        <element label="Active" max_length="40" name="active" type="string"/>
+        <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
         <element attributes="types=choice,types=integer" choice="1" dependent="table" dependent_on_field="table" label="Context" max_length="40" name="context" type="field_name" use_dependent_field="true">
             <choice/>
         </element>
