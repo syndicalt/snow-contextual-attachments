@@ -10,14 +10,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-11-06 02:53:56</sys_created_on>
         <sys_id>f44bef0607d6711027f6f4be7c1ed06e</sys_id>
-        <sys_mod_count>1076</sys_mod_count>
+        <sys_mod_count>1077</sys_mod_count>
         <sys_name>contextual_attachments</sys_name>
         <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
         <sys_policy/>
         <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
         <sys_update_name>sys_ui_macro_f44bef0607d6711027f6f4be7c1ed06e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-11-12 01:29:50</sys_updated_on>
+        <sys_updated_on>2023-11-12 01:32:26</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -115,50 +115,6 @@
 
 		current_context;
 	</g2:evaluate>
-
-	<!-- <g2:evaluate var="jvar_current_context_value" object="true" jelly="true">
-        var current_context = {
-			"custom": false,
-			"results": []
-		};
-        var recordTarget = table_name;
-        var getContexts = new GlideRecordSecure("x_975207_context_0_upload_contexts"); //matchContext
-        getContexts.addQuery("table", recordTarget); //matchContext
-        getContexts.query() //matchContext
-
-        if(getContexts.next()) { //matchContext if result.status = 200
-			GLOBAL_CONTEXT = true;		
-			if(getContexts.getValue("context_type") == "custom_defined") {
-				var customContexts = new GlideRecordSecure("x_975207_context_0_custom_contexts")
-				customContexts.addQuery("related_context", getContexts.sys_id);
-				customContexts.query();
-				current_context.custom = true;
-				while(customContexts.next()) {
-					current_context.results.push({
-						"context": null,
-						"name": customContexts.name.toString(),
-						"value": customContexts.value.toString()
-					});
-				}
-			} else {
-				var readbleContext = getContexts.getValue("context").toString();
-				var contextVals = new GlideRecordSecure("sys_choice");
-				contextVals.addQuery("name", recordTarget)
-				contextVals.addQuery("element", getContexts.getValue("context"));
-				contextVals.query();
-		
-				while(contextVals.next()) {
-					current_context.results.push({
-						"context": getContexts.context.toString(),
-						"name": contextVals.label.toString(),
-						"value": contextVals.value.toString()
-					});
-				}
-			}
-		}
- 
-        current_context;
-    </g2:evaluate> -->
 	
     <g2:evaluate var="jvar_res" object="true" jelly="true">
 		var res = [];
@@ -241,7 +197,7 @@
 		</j2:if>
     </div>
 	
-	&lt;script&gt;
+	<script>
 		function deleteAttachment(id) {
 			var ga = new GlideAjax("x_975207_context_0.ContextualAttachmentsClientUtils");
 			ga.addParam("sysparm_name", "deleteAttachment");
@@ -342,7 +298,7 @@
 		const fileInput = document.getElementById("file-input");
 		fileInput.addEventListener("change", handleFileInput);
 		dropZone.addEventListener("click", () => fileInput.click());
-	&lt;/script&gt;
+	</script>
 </j:jelly>]]></xml>
     </sys_ui_macro>
 </record_update>
