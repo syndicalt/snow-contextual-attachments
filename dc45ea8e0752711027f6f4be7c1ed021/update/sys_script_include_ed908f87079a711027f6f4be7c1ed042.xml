@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_975207_context_0.ContextualAttachmentsClientUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>ContextualAttachmentsClientUtils</name>
+        <script><![CDATA[var ContextualAttachmentsClientUtils = Class.create();
+ContextualAttachmentsClientUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	matchContext: function(t, id) {
+		var res = new Object({
+			"status": new Number(400),
+			"context_sys_id": new String(),
+			"context_type": new String(),
+			"context": new String()
+		});
+		var contexts = new Array();
+		var table = t;
+		var sys_id = id;
+		
+		try{
+			var uploadContext = new GlideRecordSecure("x_975207_context_0_upload_contexts");
+			uploadContext.addQuery("table", table);
+			uploadContext.addQuery("active", true);
+			uploadContext.orderByDesc("order");
+			uploadContext.query();
+
+			while(uploadContext.next()) {
+				var obj = {}
+				obj.sys_id = uploadContext.getUniqueValue().toString();
+				uploadContext.getValue("filter_condition") ? obj.filter = true : obj.filter = false;
+				obj.filter_condition = uploadContext.getValue("filter_condition");
+				obj.context_type = uploadContext.getValue("context_type").toString();
+				obj.context = uploadContext.getValue("context");
+				
+				contexts.push(obj);
+			}
+
+			var contextMatch = new GlideRecordSecure(table);
+
+			contexts.forEach(function(context, i){
+				if(context.filter) {
+					contextMatch.initialize();
+					contextMatch.addEncodedQuery(context.filter_condition);
+					contextMatch.query();
+
+					if(!contextMatch.hasNext()) {
+						contexts.splice(i, 1);
+					} else {
+						while(contextMatch.next()) {
+							if(contextMatch.getUniqueValue() == sys_id) {
+								res.status = 200;
+								res.context_sys_id = context.sys_id;
+								res.context_type = context.context_type;
+								res.context = context.context;
+							}
+						}
+					}
+				}  else if(res.status == 400) {
+					res.status = 200;
+					res.context_sys_id = context.sys_id;
+					res.context_type = context.context_type;
+					res.context = context.context;
+				}              
+			});
+
+			return res;
+		} catch(e) {
+			gs.error("[ContextualAttachmentsClientUtils][matchContext]: " + e.message, "ContextualAttachments");
+			throw new Error(e.message);
+		}
+	},
+
+	postAttachment: function() {
+		var sys_id = this.getParameter("sysparm_record");
+		var table = this.getParameter("sysparm_table");
+		var fileName = this.getParameter("sysparm_fileName");
+		var file = this.getParameter("sysparm_file");
+		var choice = this.getParameter("sysparm_choice");
+		var contentType = "text/plain"
+
+		var record = new GlideRecordSecure(table);
+		record.get(sys_id);
+
+		try{
+			var attachment = new GlideSysAttachment();
+			var agr = attachment.write(record, fileName, contentType, file);
+			
+			var rel = new GlideRecordSecure("x_975207_context_0_upload_contexts");
+			rel.addQuery("table", table);
+			rel.query();
+
+			if(rel.next()) {
+				var newRel = new GlideRecordSecure("x_975207_context_0_sys_attachment_rel_context");
+				newRel.context_value = choice.split("_").join(" ");
+				newRel.related_attachment = agr;
+				newRel.related_record = sys_id;
+				newRel.related_context = rel.getValue("sys_id");
+				newRel.related_table = table;
+				newRel.insert();
+			}
+			
+			var obj = {
+				"sys_id": "",
+				"element": ""
+			}
+			
+			obj.sys_id = agr;
+			obj.element += "<span class=\"attachment-link\">";
+			obj.element += fileName;
+			obj.element += "<a title=\"Download Attachment\" href=\"/sys_attachment.do?sys_id=" + agr + "\" rel=\"nofollow\">";
+			obj.element += "<span class=\"btn btn-small icon-download\" />";
+			obj.element += "</a>";
+			obj.element += "<span title=\"Remove Attachment\" onClick=\"deleteAttachment('" + agr + "')\" >";
+			obj.element += "<span class=\"btn btn-small icon-delete\" />";
+			obj.element += "</span>";
+			obj.element += "</span>";
+
+			return JSON.stringify(obj);	
+		} catch(e) {
+			gs.error("[ContextualAttachmentsClientUtils][matchContext]: " + e.message, "ContextualAttachments");
+			throw new Error(e.message);
+		}
+	},
+
+	deleteAttachment: function() {
+		var id = this.getParameter("sysparm_attSysId");
+		var table = this.getParameter("sysparm_table");
+
+		try{
+			var rel = new GlideRecordSecure("x_975207_context_0_sys_attachment_rel_context");
+			rel.addQuery("related_attachment", id)
+			rel.addQuery("related_table", table);
+			rel.query();
+
+			if(rel.next()) {
+				rel.deleteRecord();
+				var gsa = new GlideSysAttachment();
+				gsa.deleteAttachment(id);
+			}	
+			
+			return true;
+		} catch(e) {
+			gs.error("[ContextualAttachmentsClientUtils][matchContext]: " + e.message, "ContextualAttachments");
+			throw new Error(e.message);
+		}
+	},
+
+    type: 'ContextualAttachmentsClientUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-09 02:25:01</sys_created_on>
+        <sys_id>ed908f87079a711027f6f4be7c1ed042</sys_id>
+        <sys_mod_count>68</sys_mod_count>
+        <sys_name>ContextualAttachmentsClientUtils</sys_name>
+        <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
+        <sys_update_name>sys_script_include_ed908f87079a711027f6f4be7c1ed042</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-11 21:27:06</sys_updated_on>
+    </sys_script_include>
+</record_update>

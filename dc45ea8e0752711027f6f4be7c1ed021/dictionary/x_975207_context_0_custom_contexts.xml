@@ -2,6 +2,7 @@
     <element db_object_id="3dddfeca07d2711027f6f4be7c1ed0ed" label="Custom Contexts" max_length="40" name="x_975207_context_0_custom_contexts" type="collection">
         <element label="Name" max_length="255" name="name" type="string"/>
         <element label="Related Context" max_length="32" name="related_context" read_only="true" reference="x_975207_context_0_upload_contexts" type="reference"/>
+        <element label="Value" max_length="255" name="value" read_only="true" type="string"/>
         <index name="index">
             <element name="related_context"/>
         </index>

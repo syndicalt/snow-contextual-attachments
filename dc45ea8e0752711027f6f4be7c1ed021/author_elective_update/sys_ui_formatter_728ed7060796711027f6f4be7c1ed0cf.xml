@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_formatter">
+    <sys_ui_formatter action="DELETE">
+        <active>true</active>
+        <angular_module/>
+        <formatter>Contextual_Attachments</formatter>
+        <name>Contextual Attachments</name>
+        <seismic_component/>
+        <sys_class_name>sys_ui_formatter</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-06 01:59:02</sys_created_on>
+        <sys_id>728ed7060796711027f6f4be7c1ed0cf</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>Contextual Attachments</sys_name>
+        <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
+        <sys_update_name>sys_ui_formatter_728ed7060796711027f6f4be7c1ed0cf</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-06 02:46:55</sys_updated_on>
+        <table>task</table>
+        <type>formatter</type>
+    </sys_ui_formatter>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</application>
+        <file_path/>
+        <instance_id>3423375adb9b8810b847ac44d49619ad</instance_id>
+        <instance_name>dev102255</instance_name>
+        <name>sys_ui_formatter_728ed7060796711027f6f4be7c1ed0cf</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_formatter"><sys_ui_formatter action="INSERT_OR_UPDATE"><active>true</active><angular_module/><formatter>Contextual_Attachments</formatter><name>Contextual Attachments</name><seismic_component/><sys_class_name>sys_ui_formatter</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-11-06 01:59:02</sys_created_on><sys_id>728ed7060796711027f6f4be7c1ed0cf</sys_id><sys_mod_count>12</sys_mod_count><sys_name>Contextual Attachments</sys_name><sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package><sys_policy/><sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope><sys_update_name>sys_ui_formatter_728ed7060796711027f6f4be7c1ed0cf</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-11-06 02:46:55</sys_updated_on><table>task</table><type>formatter</type></sys_ui_formatter></record_update>]]></payload>
+        <payload_hash>-189694749</payload_hash>
+        <record_name>Contextual Attachments</record_name>
+        <reverted_from/>
+        <source>387e224a0792711027f6f4be7c1ed0e9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-06 02:46:55</sys_created_on>
+        <sys_id>40c92f4207d6711027f6f4be7c1ed0b0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18ba286a8bb0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-06 02:46:55</sys_updated_on>
+        <type>UI Formatter</type>
+        <update_guid>08c92f422bd671105e3909ec39e824af</update_guid>
+        <update_guid_history>08c92f422bd671105e3909ec39e824af:-189694749,a0b9a38217d6711037c4b738c62f2006:-1390534944,5339e38230d671101cee1c4d3ee9b03c:236650679,ec09eb4296d67110cba6316c191107c2:-27230775,38d8ab42f9d6711000a220690627d1e0:1899962956,9688a342e5d671103c9cdadcfa84b894:-27230775,b978a34204d6711043dc00e02ae63b90:648924748,22c7e302e5d6711073b06c13e773ad6a:1266670065,3867ebceb3967110312cf966439b0711:2135184581,fd86a34a2f9671101bf9ded6103eab9d:1455220567,e31f9fc24c967110ecf8f15afc3ea7f6:126696618,6aee9306d6967110151bc8f5fe54a502:1210136894,72ce53068096711045845c8885342fc8:388339197</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-06 02:52:19</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_formatter">sys_ui_formatter</sys_db_object>
+        <sys_id>08b21e7580514a4c8675f2db6c471859</sys_id>
+        <sys_metadata>728ed7060796711027f6f4be7c1ed0cf</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Contextual Attachments</sys_name>
+        <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
+        <sys_parent display_value="Task">9577a81b34013110d0ad87e1e8b03790</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
+        <sys_scope_delete display_value="">1691d1f2aa514a94ab1f7e7f39caa510</sys_scope_delete>
+        <sys_update_name>sys_ui_formatter_728ed7060796711027f6f4be7c1ed0cf</sys_update_name>
+        <sys_update_version display_value="sys_ui_formatter_728ed7060796711027f6f4be7c1ed0cf">40c92f4207d6711027f6f4be7c1ed0b0</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-06 02:52:19</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

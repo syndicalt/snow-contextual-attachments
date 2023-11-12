@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="DELETE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>contextual_attachments</name>
+        <scoped_name>x_975207_context_0_contextual_attachments</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-06 23:33:06</sys_created_on>
+        <sys_id>7af6806a071eb11027f6f4be7c1ed0f1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>contextual_attachments</sys_name>
+        <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
+        <sys_update_name>sys_ui_macro_7af6806a071eb11027f6f4be7c1ed0f1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-06 23:33:06</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <style>
+        #container {
+            width: 98%;
+            margin: 0 auto;
+        }
+    </style>
+    <g:evaluate>
+        var res = [];
+        var sys_id = RP.getParameterValue("sys_id");
+ 
+        var gr = new GlideRecordSecure("x_975207_context_0_sys_attachment_rel_context");
+        gr.addQuery("related_record", sys_id);
+        gr.query();
+ 
+        while(gr.next()) {
+            var obj = {}
+ 
+            obj.context_value = gr.getValue("context_value").toString();
+            obj.related_attachment = gr.getDisplayValue("related_attachment").toString();
+            obj.attachment_link = gr.getValue("related_attachment").toString();
+            obj.related_context = gr.getDisplayValue("related_context").toString();
+            obj.related_record = gr.getValue("related_record");
+           
+            res.push(obj);
+        }
+ 
+        res;
+    </g:evaluate>
+ 
+    <g:evaluate>
+        var current_context_results = [];
+        var recordTarget = RP.getParameterValue("sysparm_record_target");
+        var getContexts = new GlideRecordSecure("x_975207_context_0_upload_contexts");
+        var contextRecord;
+        getContexts.addQuery("table", recordTarget);
+        getContexts.query()
+ 
+        if(getContexts.next()) contextRecord = getContexts.getValue("context").toString();
+ 
+        var contextVals = new GlideRecordSecure("sys_choice");
+        contextVals.addQuery("name", recordTarget)
+        contextVals.addQuery("element", contextRecord);
+        contextVals.query();
+ 
+        while(contextVals.next()) {
+            current_context_results.push(contextVals.label.toString());
+        }
+ 
+        current_context_results;
+    </g:evaluate>
+ 
+    <div id="container">
+        <div class="attachment-uploader">
+            <div class="drop-zone" id="drop-zone">
+                <p>Drag n Drop files here or click to browse</p>
+            </div>
+            <input type="file" id="file-input" multiple="true" style="display: none;" />
+            <ul id="file-list"></ul>
+        </div>
+        <div>
+            <j:forEach var="jvar_context" items="${current_context_results}">
+                <span id="${jvar_context}">
+					<h3 class="context-header">${jvar_context}</h3>
+					<ul>
+					<j:forEach var="jvar_f" items="${res}">
+						<g:evaluate jelly="true">
+							var context_value = jelly.jvar_f.context_value;
+							var related_attachment = jelly.jvar_f.related_attachment;
+							var attachment_link = jelly.jvar_f.attachment_link;
+							var related_context = jelly.jvar_f.related_context;
+							var related_record = jelly.jvar_f.related_record;
+						</g:evaluate>
+						<j:if test="${jvar_f.context_value == jvar_context}">
+							<li>
+								<span>
+									Related Attachment: $[SP] ${related_attachment} $[SP] 
+									<a title="Download Attachment" href="/sys_attachment.do?sys_id=${attachment_link}" rel="nofollow">
+										<span class="btn btn-small icon-download" />
+									</a>
+								</span>
+							</li>
+						</j:if>
+                	</j:forEach>
+					</ul>
+				</span>
+            </j:forEach>
+        </div>
+    </div>
+	<script>	
+		function handleDrop() {
+			alert("Drop!");
+		}
+
+		function handleFileInput() {
+			alert("File Input!")
+		}
+
+		const dropZone = document.getElementById("drop-zone");
+		dropZone.addEventListener("dragover", (event) => event.preventDefault());
+		dropZone.addEventListener("drop", handleDrop);
+		const fileInput = document.getElementById("file-input");
+		fileInput.addEventListener("change", handleFileInput);
+		dropZone.addEventListener("click", () => fileInput.click());
+	</script>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</application>
+        <file_path/>
+        <instance_id>3423375adb9b8810b847ac44d49619ad</instance_id>
+        <instance_name>dev102255</instance_name>
+        <name>sys_ui_macro_7af6806a071eb11027f6f4be7c1ed0f1</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ui_macro"&gt;&lt;sys_ui_macro action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;category&gt;general&lt;/category&gt;&lt;description/&gt;&lt;media_type/&gt;&lt;name&gt;contextual_attachments&lt;/name&gt;&lt;scoped_name&gt;x_975207_context_0_contextual_attachments&lt;/scoped_name&gt;&lt;sys_class_name&gt;sys_ui_macro&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-11-06 23:33:06&lt;/sys_created_on&gt;&lt;sys_id&gt;7af6806a071eb11027f6f4be7c1ed0f1&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;contextual_attachments&lt;/sys_name&gt;&lt;sys_package display_value="Contextual Attachments" source="x_975207_context_0"&gt;dc45ea8e0752711027f6f4be7c1ed021&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Contextual Attachments"&gt;dc45ea8e0752711027f6f4be7c1ed021&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_macro_7af6806a071eb11027f6f4be7c1ed0f1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-11-06 23:33:06&lt;/sys_updated_on&gt;&lt;xml&gt;&lt;![CDATA[&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null"&gt;
+    &lt;style&gt;
+        #container {
+            width: 98%;
+            margin: 0 auto;
+        }
+    &lt;/style&gt;
+    &lt;g:evaluate&gt;
+        var res = [];
+        var sys_id = RP.getParameterValue("sys_id");
+ 
+        var gr = new GlideRecordSecure("x_975207_context_0_sys_attachment_rel_context");
+        gr.addQuery("related_record", sys_id);
+        gr.query();
+ 
+        while(gr.next()) {
+            var obj = {}
+ 
+            obj.context_value = gr.getValue("context_value").toString();
+            obj.related_attachment = gr.getDisplayValue("related_attachment").toString();
+            obj.attachment_link = gr.getValue("related_attachment").toString();
+            obj.related_context = gr.getDisplayValue("related_context").toString();
+            obj.related_record = gr.getValue("related_record");
+           
+            res.push(obj);
+        }
+ 
+        res;
+    &lt;/g:evaluate&gt;
+ 
+    &lt;g:evaluate&gt;
+        var current_context_results = [];
+        var recordTarget = RP.getParameterValue("sysparm_record_target");
+        var getContexts = new GlideRecordSecure("x_975207_context_0_upload_contexts");
+        var contextRecord;
+        getContexts.addQuery("table", recordTarget);
+        getContexts.query()
+ 
+        if(getContexts.next()) contextRecord = getContexts.getValue("context").toString();
+ 
+        var contextVals = new GlideRecordSecure("sys_choice");
+        contextVals.addQuery("name", recordTarget)
+        contextVals.addQuery("element", contextRecord);
+        contextVals.query();
+ 
+        while(contextVals.next()) {
+            current_context_results.push(contextVals.label.toString());
+        }
+ 
+        current_context_results;
+    &lt;/g:evaluate&gt;
+ 
+    &lt;div id="container"&gt;
+        &lt;div class="attachment-uploader"&gt;
+            &lt;div class="drop-zone" id="drop-zone"&gt;
+                &lt;p&gt;Drag n Drop files here or click to browse&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;input type="file" id="file-input" multiple="true" style="display: none;" /&gt;
+            &lt;ul id="file-list"&gt;&lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;j:forEach var="jvar_context" items="${current_context_results}"&gt;
+                &lt;span id="${jvar_context}"&gt;
+					&lt;h3 class="context-header"&gt;${jvar_context}&lt;/h3&gt;
+					&lt;ul&gt;
+					&lt;j:forEach var="jvar_f" items="${res}"&gt;
+						&lt;g:evaluate jelly="true"&gt;
+							var context_value = jelly.jvar_f.context_value;
+							var related_attachment = jelly.jvar_f.related_attachment;
+							var attachment_link = jelly.jvar_f.attachment_link;
+							var related_context = jelly.jvar_f.related_context;
+							var related_record = jelly.jvar_f.related_record;
+						&lt;/g:evaluate&gt;
+						&lt;j:if test="${jvar_f.context_value == jvar_context}"&gt;
+							&lt;li&gt;
+								&lt;span&gt;
+									Related Attachment: $[SP] ${related_attachment} $[SP] 
+									&lt;a title="Download Attachment" href="/sys_attachment.do?sys_id=${attachment_link}" rel="nofollow"&gt;
+										&lt;span class="btn btn-small icon-download" /&gt;
+									&lt;/a&gt;
+								&lt;/span&gt;
+							&lt;/li&gt;
+						&lt;/j:if&gt;
+                	&lt;/j:forEach&gt;
+					&lt;/ul&gt;
+				&lt;/span&gt;
+            &lt;/j:forEach&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+	&lt;script&gt;	
+		function handleDrop() {
+			alert("Drop!");
+		}
+
+		function handleFileInput() {
+			alert("File Input!")
+		}
+
+		const dropZone = document.getElementById("drop-zone");
+		dropZone.addEventListener("dragover", (event) =&gt; event.preventDefault());
+		dropZone.addEventListener("drop", handleDrop);
+		const fileInput = document.getElementById("file-input");
+		fileInput.addEventListener("change", handleFileInput);
+		dropZone.addEventListener("click", () =&gt; fileInput.click());
+	&lt;/script&gt;
+&lt;/j:jelly&gt;]]&gt;&lt;/xml&gt;&lt;/sys_ui_macro&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-398988515</payload_hash>
+        <record_name>contextual_attachments</record_name>
+        <reverted_from/>
+        <source>387e224a0792711027f6f4be7c1ed0e9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-06 23:33:07</sys_created_on>
+        <sys_id>faf6806a071eb11027f6f4be7c1ed0f3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18ba6fb93330000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-06 23:33:07</sys_updated_on>
+        <type>Macro</type>
+        <update_guid>32f6806a6e1eb1103d62a108d37bdaf3</update_guid>
+        <update_guid_history>32f6806a6e1eb1103d62a108d37bdaf3:-398988515</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-11-06 23:33:57</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_macro">sys_ui_macro</sys_db_object>
+        <sys_id>0b60559ba9ec415480833e204c183210</sys_id>
+        <sys_metadata>7af6806a071eb11027f6f4be7c1ed0f1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>contextual_attachments</sys_name>
+        <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
+        <sys_scope_delete display_value="">1691d1f2aa514a94ab1f7e7f39caa510</sys_scope_delete>
+        <sys_update_name>sys_ui_macro_7af6806a071eb11027f6f4be7c1ed0f1</sys_update_name>
+        <sys_update_version display_value="sys_ui_macro_7af6806a071eb11027f6f4be7c1ed0f1">faf6806a071eb11027f6f4be7c1ed0f3</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-11-06 23:33:57</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

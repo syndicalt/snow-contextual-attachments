@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="filter_condition" label="Filter Condition" language="en" table="x_975207_context_0_upload_contexts">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>filter_condition</element>
+            <help/>
+            <hint/>
+            <label>Filter Condition</label>
+            <language>en</language>
+            <name>x_975207_context_0_upload_contexts</name>
+            <plural>Filter Conditions</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-11-10 20:51:37</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Filter Condition</sys_name>
+            <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
+            <sys_update_name>sys_documentation_x_975207_context_0_upload_contexts_filter_condition_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-11-10 20:51:37</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>
