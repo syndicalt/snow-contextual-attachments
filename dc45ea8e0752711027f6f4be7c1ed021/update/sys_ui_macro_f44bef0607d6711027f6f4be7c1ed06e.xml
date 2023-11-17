@@ -10,14 +10,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-11-06 02:53:56</sys_created_on>
         <sys_id>f44bef0607d6711027f6f4be7c1ed06e</sys_id>
-        <sys_mod_count>1077</sys_mod_count>
+        <sys_mod_count>1293</sys_mod_count>
         <sys_name>contextual_attachments</sys_name>
         <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
         <sys_policy/>
         <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
         <sys_update_name>sys_ui_macro_f44bef0607d6711027f6f4be7c1ed06e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-11-12 01:32:26</sys_updated_on>
+        <sys_updated_on>2023-11-17 01:34:50</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -56,6 +56,9 @@
 			padding: 0px 10px 10px 10px;
 			border: 1px dotted gray;
 		}
+		div.top-pad {
+			padding-top: 1.5rem;
+		}
 		h4.underlined {
 			text-decoration: underline;
 		}
@@ -63,8 +66,60 @@
 			color: gray;
 			font-weight: bold;
 		}
+		.h5 {
+			color: gray;
+			font-size: 15px;
+			font-weight: bold;
+			padding-left: 0.1rem;
+		}
 		input#file-input {
 			display: none;
+		}
+		span.created-by {
+			font-weight: normal;
+			font-size: 12px;
+		}
+		ul.tree, ul.tree ul {
+			list-style: none;
+			margin: 0;
+			padding: 0.1rem;
+			
+		} 
+		ul.tree ul {
+			margin-left: 6px;
+		}
+		ul.tree li {
+			margin: 0;
+			width: 100%;
+			padding: 0 7px;
+			line-height: 20px;
+			color: #321;
+			font-weight: bold;
+			border-left:1px solid rgb(100,100,100);
+
+		}
+		ul.tree li:last-child {
+			border-left:none;
+		}
+		ul.tree li:before {
+			position:relative;
+			top:-0.3em;
+			height:1.5em;
+			width:12px;
+			color:white;
+			border-bottom:1px solid rgb(100,100,100);
+			content:"";
+			display:inline-block;
+			left:-7px;
+		}
+		ul.tree li:last-child:before {
+			border-left:1px solid rgb(100,100,100);   
+		}
+		.icon-delete:hover {
+			color: red;
+		}
+		.icon-download:hover {
+			color: purple;
 		}
     </style>
 	
@@ -80,13 +135,11 @@
 			"custom": false,
 			"results": []
 		}
-
 		var ga = new x_975207_context_0.ContextualAttachmentsClientUtils().matchContext(table_name, record_sys_id);
-		
-		if(ga.status === 200) GLOBAL_CONTEXT = true;
+		var readbleContext = ga.context;
 
 		if(ga.context_type == "custom_defined") {
-			var customContexts = new GlideRecordSecure("x_975207_context_0_custom_contexts");
+			var customContexts = new GlideRecord("x_975207_context_0_custom_contexts");
 			customContexts.addQuery("related_context", ga.context_sys_id);
 			customContexts.query();
 			current_context.custom = true;
@@ -98,30 +151,48 @@
 				});
 			}
 		} else {
-			var readbleContext = ga.context;
-			var contextVals = new GlideRecordSecure("sys_choice");
+			var contextVals = new GlideRecord("sys_choice");
 			contextVals.addQuery("name", table_name)
 			contextVals.addQuery("element", ga.context);
 			contextVals.query();
-	
-			while(contextVals.next()) {
-				current_context.results.push({
-					"context": "",
-					"name": contextVals.label.toString(),
-					"value": contextVals.value.toString()
-				});
+			if(!contextVals.hasNext()) {
+				var superClass = new GlideRecord("sys_db_object");
+				superClass.addQuery("name", table_name);
+				superClass.query();
+
+				if(superClass.next()) {
+					contextVals.initialize();
+					contextVals.addQuery("name", superClass.super_class.name);
+					contextVals.addQuery("element", ga.context);
+					contextVals.query();
+
+					while(contextVals.next()) {
+						current_context.results.push({
+							"context": "",
+							"name": contextVals.label.toString(),
+							"value": contextVals.value.toString()
+						});
+					}
+				}
+			} else {
+				while(contextVals.next()) {
+					current_context.results.push({
+						"context": "",
+						"name": contextVals.label.toString(),
+						"value": contextVals.value.toString()
+					});
+				}
 			}
 		}
-
+		
+		if(current_context.results.length > 0) GLOBAL_CONTEXT = true;
 		current_context;
 	</g2:evaluate>
 	
     <g2:evaluate var="jvar_res" object="true" jelly="true">
-		var res = [];
-        var sys_id = record_sys_id;
-		
-        var gr = new GlideRecordSecure("x_975207_context_0_sys_attachment_rel_context");
-        gr.addQuery("related_record", sys_id);
+		var res = [];	
+        var gr = new GlideRecord("x_975207_context_0_sys_attachment_rel_context");
+        gr.addQuery("related_record", record_sys_id);
         gr.query();
  
         while(gr.next()) {
@@ -133,6 +204,8 @@
 			obj.attachment_link = gr.getValue("related_attachment").toString();
 			obj.related_context = gr.getDisplayValue("related_context").toString();
 			obj.related_record = gr.getValue("related_record");
+			obj.created_by = gr.getDisplayValue("created_by");
+			obj.created_date = new GlideDateTime(gr.getValue("sys_created_on")).getDate();
 		
 			res.push(obj);
         }
@@ -162,16 +235,18 @@
 			<div id="file-list">
 				<input type="hidden" id="context_reader" value="$[readbleContext || '']" />
 				<h4 class="underlined">Attached Files by Available Context</h4>
-				<div class="bordered">
+				<div class="bordered top-pad">
 					<j2:forEach var="jvar_context" items="$[jvar_current_context_value.results]">
-						<span>
-							<h5>$[jvar_context.name]</h5>
-							<ul id="$[jvar_context.value]" name="$[jvar_context.name]">
+						<ul class="tree">
+							<span class="icon-folder">
+								<span class="h5">$[jvar_context.name]</span>
+							</span>
+							<ul id="$[jvar_context.value]" name="$[jvar_context.name]" class="tree">
 							<j2:forEach var="jvar_f" items="$[jvar_res]">
 								<j2:if test="$[jvar_f.context_value == jvar_context.name]">
 									<li id="$[jvar_f.related_attachment_sys_id]">
 										<span class="attachment-link">
-											$[jvar_f.related_attachment] $[SP] 
+											$[jvar_f.related_attachment] $[SP] <span class="created-by">(Attached By: $[jvar_f.created_by] on $[jvar_f.created_date])</span> $[SP]
 											<a title="Download Attachment" href="/sys_attachment.do?sys_id=$[jvar_f.attachment_link]" rel="nofollow">
 												<span class="btn btn-small icon-download" />
 											</a>
@@ -183,7 +258,7 @@
 								</j2:if>
 							</j2:forEach>
 							</ul>
-						</span>
+						</ul>
 					</j2:forEach>
 				</div>
 			</div>
@@ -191,12 +266,12 @@
 		<j2:if test="$[!GLOBAL_CONTEXT]">
 			<div>
 				<p>
-					No attachment context has been configured for table $[table_name] or the current record does not meet any context criteria.
+					No attachment context has been configured for table $[table_name] or the current record does not meet any context criteria. Please contact your Context Administrator with any questions or issues.
 				</p>
 			</div>
 		</j2:if>
     </div>
-	
+
 	<script>
 		function deleteAttachment(id) {
 			var ga = new GlideAjax("x_975207_context_0.ContextualAttachmentsClientUtils");
@@ -226,17 +301,28 @@
 		}
 
 		function handleFileInput(event) {
-			const ccCheck = document.getElementById("custom_context");
-			const customContext = g_form.getValue("custom_context");
 			const fileList = event.target.files;
 			const readableContext = document.getElementById("context_reader").getAttribute("value");
-			let choiceValue, choiceOption;
+			const customContext = g_form.getValue("custom_context");
 			if(readableContext) {
-				choiceValue = g_form.getValue(readableContext);
-				choiceOption = g_form.getOption(readableContext, choiceValue).text
-			}
+				const choiceValue = g_form.getValue(readableContext);
+				let chk = new GlideAjax("x_975207_context_0.ContextualAttachmentsClientUtils");
+				chk.addParam("sysparm_name", "getChoiceFromList");
+				chk.addParam("sysparm_table", g_form.getTableName());
+				chk.addParam("sysparm_record", g_form.getUniqueValue());
+				chk.addParam("sysparm_list", readableContext);
+				chk.getXML(cb);
 
-			if(ccCheck) {
+				function cb(response) {
+					var answer = response.responseXML.documentElement.getAttribute("answer");
+					for(file in fileList) {
+						if(fileList[file].size) {
+
+							attachFile(fileList[file], JSON.parse(answer).value, JSON.parse(answer).display);
+						}
+					}
+				}
+			} else {
 				if(customContext == "") {
 					var element = document.getElementById("err")
 					element.innerHTML = "Please select a context!";
@@ -247,57 +333,75 @@
 				} else {
 					for(file in fileList) {
 						if(fileList[file].size) {
-							attachFile(fileList[file], customContext, choiceValue);
+							attachFile(fileList[file], null, customContext);
 						}
-					}
-				}
-			} else {
-				for(file in fileList) {
-					if(fileList[file].size) {
-						attachFile(fileList[file], customContext, choiceValue);
 					}
 				}
 			}
 		}
 
-		function attachFile(file, choice, value) {
+		function attachFile(file, value, display) {
 			let ga = new GlideAjax("x_975207_context_0.ContextualAttachmentsClientUtils");
 			ga.addParam("sysparm_name", "postAttachment");
 			ga.addParam("sysparm_table", g_form.getTableName());
 			ga.addParam("sysparm_record", g_form.getUniqueValue());
 			ga.addParam("sysparm_fileName", file.name);
 			ga.addParam("sysparm_file", file);
-			ga.addParam("sysparm_choice", choice);
+			ga.addParam("sysparm_user", g_user.getUserID());
+			ga.addParam("sysparm_choice", display);
 			
 			let res = ga.getXML(function(response) {
 				let answer = response.responseXML.documentElement.getAttribute("answer");
-				
 				if(answer.sys_id == "") {
 					g_form.addInfoMessage(answer);
 				} else {
 					if(value) {
 						appendHTMLElement(JSON.parse(answer), value);
 					} else {
-						appendHTMLElement(JSON.parse(answer), choice);
+						appendHTMLElement(JSON.parse(answer), display);
 					}
 				}
 			});
 		}
 
 		function appendHTMLElement(el, choice) {
-			let fileListContainer = document.getElementById(choice); //choice.split(' ').join('_'));
-			let listItem = document.createElement("li");
-			listItem.id = el.sys_id;
-			listItem.innerHTML = el.element;
-			fileListContainer.appendChild(listItem);
+			try {
+				let fileListContainer = document.getElementById(choice); //choice.split(' ').join('_'));
+				let listItem = document.createElement("li");
+				listItem.id = el.sys_id;
+				listItem.innerHTML = el.element;
+				fileListContainer.appendChild(listItem);
+			} catch(e) {
+				g_form.addErrorMessage(e.message);
+				if(e.message = "Error MessageCannot read properties of null (reading 'appendChild')") {
+					g_form.addErrorMessage("This error is caused by the associated Attachment Context field not appearing on the Incident form. Please contact your administrator.")
+				}
+			}
+			
 		}
+
+		(function(exports, d) {
+			function domReady(fn, context) {
+				function onReady(event) {
+					d.removeEventListener("DOMContentLoaded", onReady);
+					fn.call(context || exports, event);
+				}
+
+				d.addEventListener
+				d.addEventListener("DOMContentLoaded", onReady)
+			}
+
+			exports.domReady = domReady;
+		})(window, document);
 		
-		const dropZone = document.getElementById("drop-zone");
-		//dropZone.addEventListener("dragover", (event) => event.preventDefault());
-		//dropZone.addEventListener("drop", handleDrop);
-		const fileInput = document.getElementById("file-input");
-		fileInput.addEventListener("change", handleFileInput);
-		dropZone.addEventListener("click", () => fileInput.click());
+		domReady(function(event) {
+			const dropZone = document.getElementById("drop-zone");
+			//dropZone.addEventListener("dragover", (event) => event.preventDefault());
+			//dropZone.addEventListener("drop", handleDrop);
+			const fileInput = document.getElementById("file-input");
+			fileInput.addEventListener("change", handleFileInput);
+			dropZone.addEventListener("click", () => fileInput.click());
+		});
 	</script>
 </j:jelly>]]></xml>
     </sys_ui_macro>
