@@ -10,14 +10,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-11-06 02:53:56</sys_created_on>
         <sys_id>f44bef0607d6711027f6f4be7c1ed06e</sys_id>
-        <sys_mod_count>1293</sys_mod_count>
+        <sys_mod_count>1299</sys_mod_count>
         <sys_name>contextual_attachments</sys_name>
         <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
         <sys_policy/>
         <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
         <sys_update_name>sys_ui_macro_f44bef0607d6711027f6f4be7c1ed06e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-11-17 01:34:50</sys_updated_on>
+        <sys_updated_on>2023-11-17 04:20:13</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -306,7 +306,7 @@
 			const customContext = g_form.getValue("custom_context");
 			if(readableContext) {
 				const choiceValue = g_form.getValue(readableContext);
-				let chk = new GlideAjax("x_975207_context_0.ContextualAttachmentsClientUtils");
+				let chk = new GlideAjax("x_975207_context_0.ContextualAttachmentsClientUtils");			
 				chk.addParam("sysparm_name", "getChoiceFromList");
 				chk.addParam("sysparm_table", g_form.getTableName());
 				chk.addParam("sysparm_record", g_form.getUniqueValue());
@@ -315,9 +315,9 @@
 
 				function cb(response) {
 					var answer = response.responseXML.documentElement.getAttribute("answer");
+
 					for(file in fileList) {
 						if(fileList[file].size) {
-
 							attachFile(fileList[file], JSON.parse(answer).value, JSON.parse(answer).display);
 						}
 					}

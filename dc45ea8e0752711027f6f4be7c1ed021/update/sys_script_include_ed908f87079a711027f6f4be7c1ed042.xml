@@ -9,6 +9,21 @@
         <name>ContextualAttachmentsClientUtils</name>
         <script><![CDATA[var ContextualAttachmentsClientUtils = Class.create();
 ContextualAttachmentsClientUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	getChoiceFromList: function() {
+		var table = this.getParameter("sysparm_table");
+		var record = this.getParameter("sysparm_record");
+		var list = this.getParameter("sysparm_list");
+		var res = {};
+
+		var gr = new GlideRecord(table);
+		gr.get(record);
+
+		res.value = gr.getValue(list);
+		res.display = gr.getDisplayValue(list);
+		
+		return JSON.stringify(res);
+	},
+	
 	matchContext: function(t, id) {
 		var res = new Object({
 			"status": new Number(400),
@@ -28,7 +43,7 @@ ContextualAttachmentsClientUtils.prototype = Object.extendsObject(global.Abstrac
 			uploadContext.query();
 
 			while(uploadContext.next()) {
-				var obj = {}
+				var obj = {};
 				obj.sys_id = uploadContext.getUniqueValue().toString();
 				uploadContext.getValue("filter_condition") ? obj.filter = true : obj.filter = false;
 				obj.filter_condition = uploadContext.getValue("filter_condition");
@@ -38,8 +53,8 @@ ContextualAttachmentsClientUtils.prototype = Object.extendsObject(global.Abstrac
 				contexts.push(obj);
 			}
 
-			var contextMatch = new GlideRecordSecure(table);
-
+			var contextMatch = new GlideRecord(table);
+			
 			contexts.forEach(function(context, i){
 				if(context.filter) {
 					contextMatch.initialize();
@@ -79,7 +94,8 @@ ContextualAttachmentsClientUtils.prototype = Object.extendsObject(global.Abstrac
 		var fileName = this.getParameter("sysparm_fileName");
 		var file = this.getParameter("sysparm_file");
 		var choice = this.getParameter("sysparm_choice");
-		var contentType = "text/plain"
+		var user = this.getParameter("sysparm_user");
+		var contentType = "text/plain";
 
 		var record = new GlideRecordSecure(table);
 		record.get(sys_id);
@@ -88,24 +104,25 @@ ContextualAttachmentsClientUtils.prototype = Object.extendsObject(global.Abstrac
 			var attachment = new GlideSysAttachment();
 			var agr = attachment.write(record, fileName, contentType, file);
 			
-			var rel = new GlideRecordSecure("x_975207_context_0_upload_contexts");
+			var rel = new GlideRecord("x_975207_context_0_upload_contexts");
 			rel.addQuery("table", table);
 			rel.query();
 
 			if(rel.next()) {
-				var newRel = new GlideRecordSecure("x_975207_context_0_sys_attachment_rel_context");
+				var newRel = new GlideRecord("x_975207_context_0_sys_attachment_rel_context");
 				newRel.context_value = choice.split("_").join(" ");
 				newRel.related_attachment = agr;
 				newRel.related_record = sys_id;
 				newRel.related_context = rel.getValue("sys_id");
 				newRel.related_table = table;
+				newRel.created_by = user;
 				newRel.insert();
 			}
 			
 			var obj = {
 				"sys_id": "",
 				"element": ""
-			}
+			};
 			
 			obj.sys_id = agr;
 			obj.element += "<span class=\"attachment-link\">";
@@ -130,8 +147,8 @@ ContextualAttachmentsClientUtils.prototype = Object.extendsObject(global.Abstrac
 		var table = this.getParameter("sysparm_table");
 
 		try{
-			var rel = new GlideRecordSecure("x_975207_context_0_sys_attachment_rel_context");
-			rel.addQuery("related_attachment", id)
+			var rel = new GlideRecord("x_975207_context_0_sys_attachment_rel_context");
+			rel.addQuery("related_attachment", id);
 			rel.addQuery("related_table", table);
 			rel.query();
 
@@ -154,13 +171,13 @@ ContextualAttachmentsClientUtils.prototype = Object.extendsObject(global.Abstrac
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-11-09 02:25:01</sys_created_on>
         <sys_id>ed908f87079a711027f6f4be7c1ed042</sys_id>
-        <sys_mod_count>68</sys_mod_count>
+        <sys_mod_count>69</sys_mod_count>
         <sys_name>ContextualAttachmentsClientUtils</sys_name>
         <sys_package display_value="Contextual Attachments" source="x_975207_context_0">dc45ea8e0752711027f6f4be7c1ed021</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Contextual Attachments">dc45ea8e0752711027f6f4be7c1ed021</sys_scope>
         <sys_update_name>sys_script_include_ed908f87079a711027f6f4be7c1ed042</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-11-11 21:27:06</sys_updated_on>
+        <sys_updated_on>2023-11-17 04:18:27</sys_updated_on>
     </sys_script_include>
 </record_update>
